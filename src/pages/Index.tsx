@@ -14,7 +14,7 @@ const Index = () => {
   const renderContent = () => {
     switch (currentView) {
       case 'landing':
-        return <LandingPage />;
+        return <LandingPage onNavigateToRegister={() => setCurrentView('register')} />;
       case 'register':
         return <StudentRegistration />;
       case 'dashboard':
@@ -22,7 +22,7 @@ const Index = () => {
       case 'resume':
         return <ResumeAnalysis />;
       default:
-        return <LandingPage />;
+        return <LandingPage onNavigateToRegister={() => setCurrentView('register')} />;
     }
   };
 

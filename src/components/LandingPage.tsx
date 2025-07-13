@@ -76,7 +76,11 @@ const testimonials = [
   }
 ];
 
-export function LandingPage() {
+interface LandingPageProps {
+  onNavigateToRegister?: () => void;
+}
+
+export function LandingPage({ onNavigateToRegister }: LandingPageProps) {
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -107,7 +111,7 @@ export function LandingPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" variant="gradient" className="text-lg px-8">
+                <Button size="lg" variant="gradient" className="text-lg px-8" onClick={onNavigateToRegister}>
                   Get Started Free
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
@@ -285,17 +289,33 @@ export function LandingPage() {
               Join thousands of students who have successfully placed with our AI-powered platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="text-lg px-8">
+              <Button size="lg" variant="secondary" className="text-lg px-8" onClick={onNavigateToRegister}>
                 Start Free Today
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                Contact Us
+              <Button size="lg" variant="outline" className="text-lg px-8 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary" asChild>
+                <a href="mailto:contact@simplyplaced.ai" className="text-success hover:text-success">
+                  Contact Us
+                </a>
               </Button>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="py-8 bg-muted border-t">
+        <div className="container mx-auto px-4">
+          <div className="text-center space-y-4">
+            <div className="text-sm text-muted-foreground">
+              © 2024 SimplyPlaced! Pvt Ltd. All rights reserved.
+            </div>
+            <div className="text-xs text-muted-foreground">
+              SimplyPlaced!® is a registered trademark of SimplyPlaced! Pvt Ltd.
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
