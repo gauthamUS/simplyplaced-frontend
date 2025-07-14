@@ -12,6 +12,7 @@ import { useToast } from '@/hooks/use-toast';
 interface FormData {
   name: string;
   rollNumber: string;
+  email: string;
   stream: string;
   customStream: string;
   cgpa: string;
@@ -54,6 +55,7 @@ export function StudentRegistration() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     rollNumber: '',
+    email: '',
     stream: '',
     customStream: '',
     cgpa: '',
@@ -158,6 +160,21 @@ export function StudentRegistration() {
                   placeholder="Enter your roll number"
                 />
               </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="email">VIT Student Email *</Label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={(e) => handleInputChange('email', e.target.value)}
+                placeholder="yourname@vitstudent.ac.in"
+                pattern=".*@vitstudent\.ac\.in$"
+              />
+              <p className="text-xs text-muted-foreground">
+                Must be a valid VIT student email (ends with @vitstudent.ac.in)
+              </p>
             </div>
 
             <div className="space-y-2">
