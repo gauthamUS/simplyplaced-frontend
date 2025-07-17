@@ -15,7 +15,8 @@ import {
   Calendar,
   Star,
   FileText,
-  Target
+  Target,
+  RefreshCw
 } from 'lucide-react';
 
 interface JobMatch {
@@ -121,214 +122,223 @@ export function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-subtle">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Welcome back, Alex!</h1>
-          <p className="text-muted-foreground">Here's your latest placement activity and job matches.</p>
+    <div className="bg-background p-6">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-foreground mb-2">Welcome back, Gautham! 👋</h1>
+        <p className="text-muted-foreground">Here's what's happening with your placement journey</p>
+      </div>
+
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <Card className="bg-blue-50 border-blue-200">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-muted-foreground">Profile Completion</p>
+                <p className="text-2xl font-bold text-foreground">85%</p>
+              </div>
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <Target className="h-6 w-6 text-blue-600" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-green-50 border-green-200">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-muted-foreground">Job Matches</p>
+                <p className="text-2xl font-bold text-foreground">{mockStats.totalMatches}</p>
+              </div>
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                <Briefcase className="h-6 w-6 text-green-600" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-purple-50 border-purple-200">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-muted-foreground">Applications Sent</p>
+                <p className="text-2xl font-bold text-foreground">{mockStats.applications}</p>
+              </div>
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                <FileText className="h-6 w-6 text-purple-600" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-orange-50 border-orange-200">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-muted-foreground">Interview Calls</p>
+                <p className="text-2xl font-bold text-foreground">{mockStats.interviews}</p>
+              </div>
+              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                <Star className="h-6 w-6 text-orange-600" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Recent Job Matches Section */}
+      <div className="mb-8">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-semibold text-foreground">Recent Job Matches</h2>
+          <Button variant="link" className="text-primary">View All</Button>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="shadow-soft">
-            <CardContent className="p-6">
+        <div className="space-y-4">
+          {mockJobMatches.map((job) => (
+            <Card key={job.id} className="p-6 hover:shadow-md transition-all duration-200">
               <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Job Matches</p>
-                  <p className="text-2xl font-bold text-foreground">{mockStats.totalMatches}</p>
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
+                    <Building className="h-6 w-6 text-primary-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">{job.title}</h3>
+                    <p className="text-muted-foreground">{job.company} • {job.location}</p>
+                    <div className="flex items-center space-x-2 mt-1">
+                      <span className="text-sm text-muted-foreground">₹18-12 LPA</span>
+                      <Badge variant={job.type === 'internship' ? 'secondary' : 'default'} className="text-xs">
+                        {job.type === 'internship' ? 'Internship' : 'Full-time'}
+                      </Badge>
+                    </div>
+                  </div>
                 </div>
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                  <Target className="h-6 w-6 text-primary" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="shadow-soft">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Pending Actions</p>
-                  <p className="text-2xl font-bold text-foreground">{mockStats.pendingActions}</p>
-                </div>
-                <div className="w-12 h-12 bg-warning/10 rounded-lg flex items-center justify-center">
-                  <AlertTriangle className="h-6 w-6 text-warning" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="shadow-soft">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Applications</p>
-                  <p className="text-2xl font-bold text-foreground">{mockStats.applications}</p>
-                </div>
-                <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
-                  <FileText className="h-6 w-6 text-accent" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="shadow-soft">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Interviews</p>
-                  <p className="text-2xl font-bold text-foreground">{mockStats.interviews}</p>
-                </div>
-                <div className="w-12 h-12 bg-success/10 rounded-lg flex items-center justify-center">
-                  <Star className="h-6 w-6 text-success" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Tabs */}
-        <div className="flex space-x-1 mb-6 bg-muted p-1 rounded-lg w-fit">
-          <Button
-            variant={selectedTab === 'matches' ? 'default' : 'ghost'}
-            size="sm"
-            onClick={() => setSelectedTab('matches')}
-          >
-            Job Matches
-          </Button>
-          <Button
-            variant={selectedTab === 'applications' ? 'default' : 'ghost'}
-            size="sm"
-            onClick={() => setSelectedTab('applications')}
-          >
-            Applications
-          </Button>
-          <Button
-            variant={selectedTab === 'profile' ? 'default' : 'ghost'}
-            size="sm"
-            onClick={() => setSelectedTab('profile')}
-          >
-            Profile
-          </Button>
-        </div>
-
-        {/* Job Matches */}
-        {selectedTab === 'matches' && (
-          <div className="space-y-6">
-            <Card className="shadow-medium">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Briefcase className="h-5 w-5 text-primary" />
-                  <span>Latest Job Matches</span>
-                </CardTitle>
-                <CardDescription>
-                  AI-powered matches based on your profile and preferences
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {mockJobMatches.map((job) => (
-                  <Card key={job.id} className="p-4 hover:shadow-soft transition-all duration-200">
-                    <div className="flex flex-col lg:flex-row lg:items-center justify-between space-y-4 lg:space-y-0">
-                      <div className="flex-1 space-y-2">
-                        <div className="flex items-center space-x-3">
-                          <h3 className="font-semibold text-lg">{job.title}</h3>
-                          <Badge variant={job.type === 'internship' ? 'secondary' : 'default'}>
-                            {job.type === 'internship' ? 'Internship' : 'Full-time'}
-                          </Badge>
-                        </div>
-                        
-                        <div className="flex items-center space-x-4 text-sm text-muted-foreground">
-                          <div className="flex items-center space-x-1">
-                            <Building className="h-4 w-4" />
-                            <span>{job.company}</span>
-                          </div>
-                          <div className="flex items-center space-x-1">
-                            <MapPin className="h-4 w-4" />
-                            <span>{job.location}</span>
-                          </div>
-                          <div className="flex items-center space-x-1">
-                            <DollarSign className="h-4 w-4" />
-                            <span>{job.salary}</span>
-                          </div>
-                          <div className="flex items-center space-x-1">
-                            <Calendar className="h-4 w-4" />
-                            <span>Deadline: {job.deadline}</span>
-                          </div>
-                        </div>
-
-                        <div className="flex flex-wrap gap-2">
-                          {job.requirements.map((req, index) => (
-                            <Badge key={index} variant="outline" className="text-xs">
-                              {req}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col lg:items-end space-y-3 lg:w-64">
-                        <div className="flex items-center space-x-2">
-                          <div className="text-right">
-                            <div className={`text-xl font-bold ${getMatchColor(job.matchPercentage)}`}>
-                              {job.matchPercentage}%
-                            </div>
-                            <div className="text-xs text-muted-foreground">Match</div>
-                          </div>
-                          <div className="w-16">
-                            <Progress value={job.matchPercentage} className="h-2" />
-                          </div>
-                        </div>
-
-                        <div className="flex items-center space-x-2">
-                          {getStatusIcon(job.status)}
-                          <span className="text-sm">{getStatusText(job.status)}</span>
-                        </div>
-
-                        <div className="flex space-x-2">
-                          {job.status === 'eligible' && (
-                            <Button size="sm" variant="gradient">
-                              Apply Now
-                            </Button>
-                          )}
-                          {job.status === 'action-required' && (
-                            <Button size="sm" variant="default">
-                              Complete Profile
-                            </Button>
-                          )}
-                          <Button size="sm" variant="outline">
-                            View Details
-                          </Button>
-                        </div>
+                <div className="flex items-center space-x-6">
+                  <div className="text-center">
+                    <div className="text-lg font-semibold text-success">{job.matchPercentage}%</div>
+                    <div className="text-xs text-muted-foreground">Match Score</div>
+                    <div className="w-16 mt-1">
+                      <div className="w-full bg-muted rounded-full h-1">
+                        <div 
+                          className="bg-success h-1 rounded-full transition-all duration-300"
+                          style={{ width: `${job.matchPercentage}%` }}
+                        ></div>
                       </div>
                     </div>
-                  </Card>
-                ))}
-              </CardContent>
+                  </div>
+                  <Button size="sm" variant="default" className="bg-primary hover:bg-primary/90">
+                    Apply Now
+                  </Button>
+                  <Button size="sm" variant="outline">
+                    View Details
+                  </Button>
+                </div>
+              </div>
             </Card>
-          </div>
-        )}
+          ))}
+        </div>
+      </div>
 
-        {/* Applications Tab */}
-        {selectedTab === 'applications' && (
-          <Card className="shadow-medium">
-            <CardContent className="p-8 text-center">
-              <FileText className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Applications Dashboard</h3>
-              <p className="text-muted-foreground">Track all your job applications in one place</p>
+      {/* Email Analysis Dashboard */}
+      <div className="mb-8">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-semibold text-foreground">Email Analysis Dashboard</h2>
+          <Button variant="default" size="sm" className="bg-primary hover:bg-primary/90">
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Sync Emails
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <Card className="bg-blue-50 border-blue-200">
+            <CardContent className="p-6 text-center">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <Building className="h-6 w-6 text-blue-600" />
+              </div>
+              <div className="text-2xl font-bold text-blue-600">12</div>
+              <div className="text-sm text-muted-foreground">Placement Cell</div>
+              <div className="text-xs text-muted-foreground">New opportunities</div>
             </CardContent>
           </Card>
-        )}
 
-        {/* Profile Tab */}
-        {selectedTab === 'profile' && (
-          <Card className="shadow-medium">
-            <CardContent className="p-8 text-center">
-              <TrendingUp className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Profile Analytics</h3>
-              <p className="text-muted-foreground">View your profile strength and improvement suggestions</p>
+          <Card className="bg-green-50 border-green-200">
+            <CardContent className="p-6 text-center">
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <Briefcase className="h-6 w-6 text-green-600" />
+              </div>
+              <div className="text-2xl font-bold text-green-600">8</div>
+              <div className="text-sm text-muted-foreground">Companies</div>
+              <div className="text-xs text-muted-foreground">Direct invitations</div>
             </CardContent>
           </Card>
-        )}
+
+          <Card className="bg-purple-50 border-purple-200">
+            <CardContent className="p-6 text-center">
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <TrendingUp className="h-6 w-6 text-purple-600" />
+              </div>
+              <div className="text-2xl font-bold text-purple-600">5</div>
+              <div className="text-sm text-muted-foreground">External Drives</div>
+              <div className="text-xs text-muted-foreground">Off-campus opportunities</div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Recent Email Matches</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center justify-between p-4 border rounded-lg">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
+                  <Building className="h-4 w-4 text-primary-foreground" />
+                </div>
+                <div>
+                  <div className="font-medium">Software Developer - TechCorp</div>
+                  <div className="text-sm text-muted-foreground">From: VIT Placement Cell • Match: 95%</div>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Badge className="bg-green-100 text-green-700 border-green-200">High Match</Badge>
+                <Button variant="link" size="sm">View</Button>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between p-4 border rounded-lg">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-green-500 rounded flex items-center justify-center">
+                  <Briefcase className="h-4 w-4 text-white" />
+                </div>
+                <div>
+                  <div className="font-medium">Data Analyst Internship</div>
+                  <div className="text-sm text-muted-foreground">From: DataFlow Inc • Match: 87%</div>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Badge className="bg-yellow-100 text-yellow-700 border-yellow-200">Good Match</Badge>
+                <Button variant="link" size="sm">View</Button>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between p-4 border rounded-lg">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-purple-500 rounded flex items-center justify-center">
+                  <TrendingUp className="h-4 w-4 text-white" />
+                </div>
+                <div>
+                  <div className="font-medium">Frontend Developer - Remote</div>
+                  <div className="text-sm text-muted-foreground">From: External Drive • Match: 92%</div>
+                </div>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Badge className="bg-green-100 text-green-700 border-green-200">High Match</Badge>
+                <Button variant="link" size="sm">View</Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

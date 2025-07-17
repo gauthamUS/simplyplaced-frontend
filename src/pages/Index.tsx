@@ -4,8 +4,9 @@ import { LandingPage } from '@/components/LandingPage';
 import { StudentRegistration } from '@/components/StudentRegistration';
 import { Dashboard } from '@/components/Dashboard';
 import { ResumeAnalysis } from '@/components/ResumeAnalysis';
+import { Sidebar } from '@/components/Sidebar';
 
-type ViewType = 'landing' | 'register' | 'dashboard' | 'resume';
+type ViewType = 'landing' | 'register' | 'dashboard' | 'resume' | 'profile' | 'jobs' | 'applications' | 'analytics';
 
 const Index = () => {
   const [currentView, setCurrentView] = useState<ViewType>('landing');
@@ -21,17 +22,44 @@ const Index = () => {
         return <Dashboard />;
       case 'resume':
         return <ResumeAnalysis />;
+      case 'profile':
+        return <div className="bg-background p-6"><h1 className="text-2xl font-bold">Profile Page</h1><p>Profile management coming soon...</p></div>;
+      case 'jobs':
+        return <div className="bg-background p-6"><h1 className="text-2xl font-bold">Job Opportunities</h1><p>Job listings coming soon...</p></div>;
+      case 'applications':
+        return <div className="bg-background p-6"><h1 className="text-2xl font-bold">My Applications</h1><p>Application tracking coming soon...</p></div>;
+      case 'analytics':
+        return <div className="bg-background p-6"><h1 className="text-2xl font-bold">Analytics</h1><p>Analytics dashboard coming soon...</p></div>;
       default:
         return <LandingPage onNavigateToRegister={() => setCurrentView('register')} />;
     }
   };
 
+  const showSidebar = isAuthenticated && !['landing', 'register'].includes(currentView);
+
   return (
     <div className="min-h-screen bg-background">
-      <Navigation 
-        isAuthenticated={isAuthenticated} 
-        userName={isAuthenticated ? "Alex Kumar" : undefined}
-      />
+      {!showSidebar && (
+        <Navigation 
+          isAuthenticated={isAuthenticated} 
+          userName={isAuthenticated ? "Gautham US" : undefined}
+        />
+      )}
+      
+      {showSidebar ? (
+        <div className="flex h-screen">
+          <Sidebar 
+            activeView={currentView} 
+            onNavigate={(view) => setCurrentView(view as ViewType)}
+            userName="Gautham US"
+          />
+          <div className="flex-1 overflow-auto">
+            {renderContent()}
+          </div>
+        </div>
+      ) : (
+        renderContent()
+      )}
       
       {/* Navigation Demo Buttons - Remove in production */}
       <div className="fixed bottom-4 right-4 z-50 flex flex-col space-y-2">
@@ -66,8 +94,6 @@ const Index = () => {
           Resume
         </button>
       </div>
-
-      {renderContent()}
     </div>
   );
 };
