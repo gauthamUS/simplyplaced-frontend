@@ -14,7 +14,84 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      email_analysis_logs: {
+        Row: {
+          analysis_status: string | null
+          email_id: string
+          error_message: string | null
+          extracted_data: Json | null
+          id: string
+          processed_at: string
+        }
+        Insert: {
+          analysis_status?: string | null
+          email_id: string
+          error_message?: string | null
+          extracted_data?: Json | null
+          id?: string
+          processed_at?: string
+        }
+        Update: {
+          analysis_status?: string | null
+          email_id?: string
+          error_message?: string | null
+          extracted_data?: Json | null
+          id?: string
+          processed_at?: string
+        }
+        Relationships: []
+      }
+      placement_opportunities: {
+        Row: {
+          company_name: string
+          deadline: string | null
+          email_date: string | null
+          email_snippet: string | null
+          email_subject: string | null
+          extracted_at: string
+          id: string
+          is_active: boolean | null
+          job_title: string
+          location: string | null
+          min_cgpa: number | null
+          requirements: string[] | null
+          salary_range: string | null
+          source_email: string | null
+        }
+        Insert: {
+          company_name: string
+          deadline?: string | null
+          email_date?: string | null
+          email_snippet?: string | null
+          email_subject?: string | null
+          extracted_at?: string
+          id?: string
+          is_active?: boolean | null
+          job_title: string
+          location?: string | null
+          min_cgpa?: number | null
+          requirements?: string[] | null
+          salary_range?: string | null
+          source_email?: string | null
+        }
+        Update: {
+          company_name?: string
+          deadline?: string | null
+          email_date?: string | null
+          email_snippet?: string | null
+          email_subject?: string | null
+          extracted_at?: string
+          id?: string
+          is_active?: boolean | null
+          job_title?: string
+          location?: string | null
+          min_cgpa?: number | null
+          requirements?: string[] | null
+          salary_range?: string | null
+          source_email?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
