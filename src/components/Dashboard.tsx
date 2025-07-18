@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { ProfilePage } from '@/components/ProfilePage';
 import { 
   Briefcase, 
   TrendingUp, 
@@ -87,6 +88,10 @@ const mockStats: DashboardStats = {
 
 export function Dashboard() {
   const [selectedTab, setSelectedTab] = useState<'matches' | 'applications' | 'profile'>('matches');
+
+  if (selectedTab === 'profile') {
+    return <ProfilePage />;
+  }
 
   const getStatusIcon = (status: JobMatch['status']) => {
     switch (status) {
