@@ -26,6 +26,7 @@ interface ProfileData {
   stream: string;
   cgpa: string;
   domainPreference: string;
+  customDomain: string;
   preferredLocations: string[];
   skills: string[];
 }
@@ -104,7 +105,7 @@ const DOMAIN_OPTIONS = [
   'Software Development', 'Data Science', 'Machine Learning', 'Cybersecurity',
   'Cloud Computing', 'Mobile Development', 'Web Development', 'DevOps',
   'UI/UX Design', 'Database Administration', 'Network Administration',
-  'Product Management', 'Digital Marketing', 'Business Analytics'
+  'Product Management', 'Digital Marketing', 'Business Analytics', 'Others'
 ];
 
 const LOCATION_OPTIONS = [
@@ -122,6 +123,7 @@ export function ProfilePage() {
     stream: 'B. Tech (Computer Science & Engg)',
     cgpa: '7.37',
     domainPreference: 'Development',
+    customDomain: '',
     preferredLocations: ['Bangalore', 'Mumbai', 'Pune'],
     skills: ['JavaScript', 'React', 'Python', 'SQL']
   });
@@ -153,6 +155,13 @@ export function ProfilePage() {
     const cgpaValue = parseFloat(cgpa);
     if (!cgpa.trim()) return 'CGPA is required';
     if (isNaN(cgpaValue) || cgpaValue < 0 || cgpaValue > 10) return 'CGPA must be between 0 and 10';
+    return '';
+  };
+
+  const validateCustomDomain = (customDomain: string) => {
+    const domainRegex = /^[a-zA-Z\s]+$/;
+    if (!customDomain.trim()) return 'Custom domain is required when Others is selected';
+    if (!domainRegex.test(customDomain)) return 'Domain can only contain letters and spaces';
     return '';
   };
 
@@ -190,6 +199,11 @@ export function ProfilePage() {
     newErrors.rollNumber = validateRollNumber(profileData.rollNumber);
     newErrors.email = validateEmail(profileData.email);
     newErrors.cgpa = validateCGPA(profileData.cgpa);
+    
+    // Validate custom domain if "Others" is selected
+    if (profileData.domainPreference === 'Others') {
+      newErrors.customDomain = validateCustomDomain(profileData.customDomain);
+    }
 
     // Remove empty errors
     Object.keys(newErrors).forEach(key => {
@@ -384,20 +398,48 @@ export function ProfilePage() {
             <div>
               <Label htmlFor="domainPreference">Domain Preference</Label>
               {isEditing ? (
-                <Select value={profileData.domainPreference} onValueChange={(value) => handleInputChange('domainPreference', value)}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select domain preference" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {DOMAIN_OPTIONS.map((domain) => (
-                      <SelectItem key={domain} value={domain}>
-                        {domain}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <div className="space-y-3">
+                  <Select 
+                    value={profileData.domainPreference} 
+                    onValueChange={(value) => {
+                      handleInputChange('domainPreference', value);
+                      if (value !== 'Others') {
+                        handleInputChange('customDomain', '');
+                      }
+                    }}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select domain preference" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {DOMAIN_OPTIONS.map((domain) => (
+                        <SelectItem key={domain} value={domain}>
+                          {domain}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  
+                  {profileData.domainPreference === 'Others' && (
+                    <div>
+                      <Input
+                        placeholder="Enter your domain preference"
+                        value={profileData.customDomain}
+                        onChange={(e) => handleInputChange('customDomain', e.target.value)}
+                        className={errors.customDomain ? 'border-destructive' : ''}
+                      />
+                      {errors.customDomain && (
+                        <p className="text-sm text-destructive mt-1">{errors.customDomain}</p>
+                      )}
+                    </div>
+                  )}
+                </div>
               ) : (
-                <p className="text-foreground font-medium">{profileData.domainPreference}</p>
+                <p className="text-foreground font-medium">
+                  {profileData.domainPreference === 'Others' && profileData.customDomain 
+                    ? profileData.customDomain 
+                    : profileData.domainPreference}
+                </p>
               )}
             </div>
 
