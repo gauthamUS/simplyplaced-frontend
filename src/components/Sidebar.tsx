@@ -64,7 +64,7 @@ export function Sidebar({ activeView, onNavigate, userName }: SidebarProps) {
 
         {/* User info */}
         {userName && (
-          <div className="p-4 border-b border-border">
+          <div className="p-4 border-b border-border cursor-pointer hover:bg-accent/50 transition-colors" onClick={() => onNavigate('profile')}>
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
                 <span className="text-sm font-medium text-primary-foreground">
