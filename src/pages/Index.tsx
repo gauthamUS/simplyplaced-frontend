@@ -5,6 +5,7 @@ import { StudentRegistration } from '@/components/StudentRegistration';
 import { Dashboard } from '@/components/Dashboard';
 import { ResumeAnalysis } from '@/components/ResumeAnalysis';
 import { ProfilePage } from '@/components/ProfilePage';
+import { JobOpportunities } from '@/components/JobOpportunities';
 import { Sidebar } from '@/components/Sidebar';
 type ViewType = 'landing' | 'register' | 'dashboard' | 'resume' | 'profile' | 'jobs' | 'applications' | 'analytics';
 const Index = () => {
@@ -23,7 +24,7 @@ const Index = () => {
       case 'profile':
         return <ProfilePage />;
       case 'jobs':
-        return <div className="bg-background p-6"><h1 className="text-2xl font-bold">Job Opportunities</h1><p>Job listings coming soon...</p></div>;
+        return <JobOpportunities />;
       case 'applications':
         return <div className="bg-background p-6"><h1 className="text-2xl font-bold">My Applications</h1><p>Application tracking coming soon...</p></div>;
       case 'analytics':
