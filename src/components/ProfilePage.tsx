@@ -16,7 +16,9 @@ import {
   Edit3,
   CheckCircle2,
   Mail,
-  User
+  User,
+  Plus,
+  X
 } from 'lucide-react';
 
 interface ProfileData {
@@ -116,6 +118,8 @@ const LOCATION_OPTIONS = [
 export function ProfilePage() {
   const { toast } = useToast();
   const [isEditing, setIsEditing] = useState(false);
+  const [showCustomSkill, setShowCustomSkill] = useState(false);
+  const [customSkill, setCustomSkill] = useState('');
   const [profileData, setProfileData] = useState<ProfileData>({
     fullName: 'Gautham US',
     rollNumber: '22bce5209',
@@ -190,6 +194,49 @@ export function ProfilePage() {
         ? prev.preferredLocations.filter(l => l !== location)
         : [...prev.preferredLocations, location]
     }));
+  };
+
+  const handleCustomSkillAdd = () => {
+    const skillRegex = /^[a-zA-Z\s/.#+-]+$/;
+    if (!customSkill.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter a skill name",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!skillRegex.test(customSkill)) {
+      toast({
+        title: "Error", 
+        description: "Skill can only contain letters, spaces, and common symbols (/, ., #, +, -)",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (profileData.skills.includes(customSkill.trim())) {
+      toast({
+        title: "Error",
+        description: "This skill is already added",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setProfileData(prev => ({
+      ...prev,
+      skills: [...prev.skills, customSkill.trim()]
+    }));
+    
+    setCustomSkill('');
+    setShowCustomSkill(false);
+    
+    toast({
+      title: "Success",
+      description: "Custom skill added successfully",
+    });
   };
 
   const handleSave = () => {
@@ -473,17 +520,65 @@ export function ProfilePage() {
         </CardHeader>
         <CardContent>
           {isEditing ? (
-            <div className="flex flex-wrap gap-2">
-              {AVAILABLE_SKILLS.map((skill) => (
-                <Badge
-                  key={skill}
-                  variant={profileData.skills.includes(skill) ? "default" : "outline"}
-                  className="cursor-pointer"
-                  onClick={() => handleSkillToggle(skill)}
+            <div className="space-y-3">
+              <div className="flex flex-wrap gap-2">
+                {AVAILABLE_SKILLS.map((skill) => (
+                  <Badge
+                    key={skill}
+                    variant={profileData.skills.includes(skill) ? "default" : "outline"}
+                    className="cursor-pointer"
+                    onClick={() => handleSkillToggle(skill)}
+                  >
+                    {skill}
+                  </Badge>
+                ))}
+                
+                <Badge 
+                  variant="outline" 
+                  className="cursor-pointer border-dashed hover:bg-muted/50"
+                  onClick={() => setShowCustomSkill(true)}
                 >
-                  {skill}
+                  <Plus className="w-3 h-3 mr-1" />
+                  Add Custom
                 </Badge>
-              ))}
+              </div>
+              
+              {showCustomSkill && (
+                <div className="flex gap-2 items-end">
+                  <div className="flex-1">
+                    <Label htmlFor="customSkill">Custom Skill</Label>
+                    <Input
+                      id="customSkill"
+                      placeholder="Enter skill name"
+                      value={customSkill}
+                      onChange={(e) => setCustomSkill(e.target.value)}
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                          handleCustomSkillAdd();
+                        }
+                      }}
+                    />
+                  </div>
+                  <Button 
+                    size="sm" 
+                    onClick={handleCustomSkillAdd}
+                    className="mb-0"
+                  >
+                    Add
+                  </Button>
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    onClick={() => {
+                      setShowCustomSkill(false);
+                      setCustomSkill('');
+                    }}
+                    className="mb-0"
+                  >
+                    <X className="w-3 h-3" />
+                  </Button>
+                </div>
+              )}
             </div>
           ) : (
             <div className="flex flex-wrap gap-2">
