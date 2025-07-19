@@ -294,7 +294,7 @@ export function LandingPage({ onNavigateToRegister }: LandingPageProps) {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button size="lg" variant="outline" className="text-lg px-8 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary" asChild>
-                <a href="mailto:contact@simplyplaced.ai" className="text-success hover:text-success">
+                <a href="mailto:contact@simplyplaced.com" className="text-success hover:text-success">
                   Contact Us
                 </a>
               </Button>
