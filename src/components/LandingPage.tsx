@@ -60,7 +60,7 @@ const testimonials = [
     name: 'Priya Sharma',
     role: 'Computer Science, IIT Delhi',
     company: 'Google',
-    content: 'Placed!.ai helped me land my dream internship at Google. The AI matching was incredibly accurate!'
+    content: 'SimplyPlaced helped me land my dream internship at Google. The AI matching was incredibly accurate!'
   },
   {
     name: 'Arjun Patel',
@@ -105,7 +105,7 @@ export function LandingPage({ onNavigateToRegister }: LandingPageProps) {
                   Away
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed">
-                  Placed!.ai uses advanced AI to match students with perfect career opportunities, 
+                  SimplyPlaced uses advanced AI to match students with perfect career opportunities, 
                   automate applications, and provide personalized career guidance.
                 </p>
               </div>
@@ -308,10 +308,10 @@ export function LandingPage({ onNavigateToRegister }: LandingPageProps) {
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4">
             <div className="text-sm text-muted-foreground">
-              © 2024 SimplyPlaced! Pvt Ltd. All rights reserved.
+              © 2024 SimplyPlaced Pvt Ltd. All rights reserved.
             </div>
             <div className="text-xs text-muted-foreground">
-              SimplyPlaced!® is a registered trademark of SimplyPlaced! Pvt Ltd.
+              SimplyPlaced® is a registered trademark of SimplyPlaced Pvt Ltd.
             </div>
           </div>
         </div>
