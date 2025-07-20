@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { LandingPage } from '@/components/LandingPage';
 import { StudentRegistration } from '@/components/StudentRegistration';
@@ -11,6 +11,15 @@ type ViewType = 'landing' | 'register' | 'dashboard' | 'resume' | 'profile' | 'j
 const Index = () => {
   const [currentView, setCurrentView] = useState<ViewType>('landing');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Check URL parameters for view
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const view = urlParams.get('view');
+    if (view && ['landing', 'register', 'dashboard', 'resume', 'profile', 'jobs', 'applications', 'analytics'].includes(view)) {
+      setCurrentView(view as ViewType);
+    }
+  }, []);
   const renderContent = () => {
     switch (currentView) {
       case 'landing':

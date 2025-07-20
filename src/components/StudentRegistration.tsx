@@ -9,6 +9,8 @@ import { Progress } from '@/components/ui/progress';
 import { Upload, CheckCircle, FileText, User, MapPin, Code, GraduationCap } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { GoogleOAuthButton } from '@/components/GoogleOAuthButton';
+import { supabase } from '@/integrations/supabase/client';
+import { useEffect } from 'react';
 
 interface FormData {
   name: string;
@@ -53,6 +55,9 @@ const domains = [
 
 export function StudentRegistration() {
   const [currentStep, setCurrentStep] = useState(1);
+  const [user, setUser] = useState<any>(null);
+  const { toast } = useToast();
+
   const [formData, setFormData] = useState<FormData>({
     name: '',
     rollNumber: '',
@@ -66,7 +71,37 @@ export function StudentRegistration() {
     domainPreference: '',
     resume: null
   });
-  const { toast } = useToast();
+
+  // Check for authenticated user and pre-fill email
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        setUser(user);
+        setFormData(prev => ({
+          ...prev,
+          name: user.user_metadata?.full_name || user.user_metadata?.name || '',
+          email: user.email || ''
+        }));
+      }
+    };
+
+    checkUser();
+
+    // Listen for auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.user) {
+        setUser(session.user);
+        setFormData(prev => ({
+          ...prev,
+          name: session.user.user_metadata?.full_name || session.user.user_metadata?.name || '',
+          email: session.user.email || ''
+        }));
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const totalSteps = 4;
   const progress = (currentStep / totalSteps) * 100;
