@@ -14,6 +14,7 @@ import {
   Clock
 } from 'lucide-react';
 import heroImage from '@/assets/hero-image.jpg';
+import { GoogleOAuthButton } from '@/components/GoogleOAuthButton';
 
 const features = [
   {
@@ -114,9 +115,7 @@ export function LandingPage({ onNavigateToRegister }: LandingPageProps) {
                   Get Started Free
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-                <Button size="lg" variant="outline" className="text-lg px-8">
-                  Watch Demo
-                </Button>
+                <GoogleOAuthButton size="lg" className="text-lg px-8" />
               </div>
 
               <div className="flex items-center space-x-8 pt-4">

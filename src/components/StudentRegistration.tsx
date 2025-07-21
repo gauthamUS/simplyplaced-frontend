@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Progress } from '@/components/ui/progress';
 import { Upload, CheckCircle, FileText, User, MapPin, Code, GraduationCap } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { GoogleOAuthButton } from '@/components/GoogleOAuthButton';
+
 import { supabase } from '@/integrations/supabase/client';
 import { useEffect } from 'react';
 
@@ -398,15 +398,6 @@ export function StudentRegistration() {
               Join SimplyPlaced to get matched with the best career opportunities
             </CardDescription>
             
-            {/* Google OAuth Button */}
-            <div className="mt-6">
-              <GoogleOAuthButton className="w-full" />
-              <div className="flex items-center my-4">
-                <div className="flex-1 border-t border-border"></div>
-                <span className="px-3 text-sm text-muted-foreground">or continue with email</span>
-                <div className="flex-1 border-t border-border"></div>
-              </div>
-            </div>
             
             <div className="mt-6">
               <div className="flex justify-between text-sm text-muted-foreground mb-2">
