@@ -137,8 +137,8 @@ export function LandingPage({ onNavigateToRegister }: LandingPageProps) {
             <div className="relative">
               <div className="relative z-10">
                 <img 
-                  src={heroImage} 
-                  alt="Students celebrating career success" 
+                  src="/lovable-uploads/08d28ff2-48f7-4f67-95b2-c33779c8cb25.png" 
+                  alt="Professional meeting with diverse team members" 
                   className="rounded-lg shadow-strong w-full h-auto"
                 />
               </div>
