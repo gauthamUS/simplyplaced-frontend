@@ -17,8 +17,8 @@ export function Navigation({ isAuthenticated = false, userName }: NavigationProp
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">S</span>
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+              <img src="/lovable-uploads/4a86a340-4d2b-42c8-875f-7cb659a53f9c.png" alt="SimplyPlaced Logo" className="w-8 h-8" />
             </div>
             <span className="text-xl font-black font-helvetica text-foreground">SimplyPlaced</span>
           </div>
