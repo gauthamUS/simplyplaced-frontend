@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { GoogleOAuthButton } from '@/components/GoogleOAuthButton';
 import { Menu, X, User, Bell, Settings } from 'lucide-react';
 
 interface NavigationProps {
@@ -74,7 +75,7 @@ export function Navigation({ isAuthenticated = false, userName }: NavigationProp
               </div>
             ) : (
               <>
-                <Button variant="ghost">Sign In</Button>
+                <GoogleOAuthButton variant="outline" />
                 <Button variant="gradient">Get Started</Button>
               </>
             )}
@@ -132,9 +133,7 @@ export function Navigation({ isAuthenticated = false, userName }: NavigationProp
                   About
                 </a>
                 <div className="pt-4 space-y-2 border-t">
-                  <Button variant="ghost" className="w-full justify-start">
-                    Sign In
-                  </Button>
+                  <GoogleOAuthButton variant="outline" className="w-full justify-start" />
                   <Button variant="gradient" className="w-full">
                     Get Started
                   </Button>
