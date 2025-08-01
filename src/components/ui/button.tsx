@@ -21,7 +21,7 @@ const buttonVariants = cva(
         success:
           "bg-success text-success-foreground hover:bg-accent-hover shadow-medium hover:shadow-strong hover:scale-105 active:scale-95",
         gradient:
-          "bg-gradient-button text-button-foreground shadow-strong hover:shadow-strong hover:scale-105 active:scale-95",
+          "bg-gradient-primary text-primary-foreground shadow-strong hover:shadow-strong hover:scale-105 active:scale-95",
       },
       size: {
         default: "h-10 px-4 py-2",

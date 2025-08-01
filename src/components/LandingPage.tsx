@@ -154,23 +154,10 @@ export function LandingPage({ onNavigateToRegister }: LandingPageProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             {stats.map((stat, index) => (
               <div key={index} className="space-y-2">
-                <div className="text-3xl md:text-4xl font-bold text-3d-premium">{stat.number}</div>
-                <div className="text-primary-foreground/80 text-3d-outline">{stat.label}</div>
+                <div className="text-3xl md:text-4xl font-bold">{stat.number}</div>
+                <div className="text-primary-foreground/80">{stat.label}</div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Brand Image Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-center">
-            <img 
-              src="/lovable-uploads/86a518de-904f-4d6d-bf6a-bdfe70257e2a.png" 
-              alt="SimplyPlaced Brand Logo" 
-              className="max-w-2xl w-full h-auto"
-            />
           </div>
         </div>
       </section>
