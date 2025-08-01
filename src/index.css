@@ -17,15 +17,15 @@ All colors MUST be HSL.
     --popover: 40 12% 98%;
     --popover-foreground: 222 84% 5%;
 
-    --primary: 214 100% 40%;
-    --primary-foreground: 255 255 255;
-    --primary-hover: 214 100% 35%;
+    --primary: 142 69% 46%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 142 69% 41%;
 
-    --secondary: 38 20% 94%;
+    --secondary: 142 20% 94%;
     --secondary-foreground: 222 84% 5%;
 
-    --muted: 36 18% 95%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 142 18% 95%;
+    --muted-foreground: 142 16% 47%;
 
     --accent: 142 76% 36%;
     --accent-foreground: 255 255 255;
@@ -40,13 +40,18 @@ All colors MUST be HSL.
     --destructive: 0 84% 60%;
     --destructive-foreground: 255 255 255;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 214 100% 40%;
+    --border: 142 32% 91%;
+    --input: 142 32% 91%;
+    --ring: 142 69% 46%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(214 100% 40%), hsl(250 100% 50%));
+    --button: 214 100% 50%;
+    --button-foreground: 0 0% 100%;
+    --button-hover: 214 100% 45%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(142 69% 46%), hsl(166 69% 46%));
     --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(166 76% 36%));
-    --gradient-subtle: linear-gradient(180deg, hsl(210 40% 98%), hsl(210 40% 96%));
+    --gradient-subtle: linear-gradient(180deg, hsl(142 10% 98%), hsl(142 10% 96%));
+    --gradient-button: linear-gradient(135deg, hsl(214 100% 50%), hsl(250 100% 60%));
 
     --shadow-soft: 0 4px 20px hsl(214 100% 40% / 0.1);
     --shadow-medium: 0 8px 30px hsl(214 100% 40% / 0.15);

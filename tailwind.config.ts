@@ -74,12 +74,18 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				button: {
+					DEFAULT: 'hsl(var(--button))',
+					foreground: 'hsl(var(--button-foreground))',
+					hover: 'hsl(var(--button-hover))'
 				}
 			},
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-success': 'var(--gradient-success)',
-				'gradient-subtle': 'var(--gradient-subtle)'
+				'gradient-subtle': 'var(--gradient-subtle)',
+				'gradient-button': 'var(--gradient-button)'
 			},
 			boxShadow: {
 				'soft': 'var(--shadow-soft)',

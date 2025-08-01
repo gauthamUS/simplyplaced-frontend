@@ -162,6 +162,19 @@ export function LandingPage({ onNavigateToRegister }: LandingPageProps) {
         </div>
       </section>
 
+      {/* Brand Image Section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center">
+            <img 
+              src="/lovable-uploads/86a518de-904f-4d6d-bf6a-bdfe70257e2a.png" 
+              alt="SimplyPlaced Brand Logo" 
+              className="max-w-2xl w-full h-auto"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section id="features" className="py-20 bg-background">
         <div className="container mx-auto px-4">
