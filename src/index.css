@@ -124,3 +124,24 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .text-3d-outline {
+    text-shadow: 
+      -1px -1px 0 rgba(0, 0, 0, 0.3),
+      1px -1px 0 rgba(0, 0, 0, 0.3),
+      -1px 1px 0 rgba(0, 0, 0, 0.3),
+      1px 1px 0 rgba(0, 0, 0, 0.3),
+      0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  .text-3d-premium {
+    text-shadow: 
+      -2px -2px 0 rgba(0, 0, 0, 0.4),
+      2px -2px 0 rgba(0, 0, 0, 0.4),
+      -2px 2px 0 rgba(0, 0, 0, 0.4),
+      2px 2px 0 rgba(0, 0, 0, 0.4),
+      0 4px 8px rgba(0, 0, 0, 0.5),
+      0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+}

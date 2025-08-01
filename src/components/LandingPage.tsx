@@ -154,8 +154,8 @@ export function LandingPage({ onNavigateToRegister }: LandingPageProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             {stats.map((stat, index) => (
               <div key={index} className="space-y-2">
-                <div className="text-3xl md:text-4xl font-bold">{stat.number}</div>
-                <div className="text-primary-foreground/80">{stat.label}</div>
+                <div className="text-3xl md:text-4xl font-bold text-3d-premium">{stat.number}</div>
+                <div className="text-primary-foreground/80 text-3d-outline">{stat.label}</div>
               </div>
             ))}
           </div>
