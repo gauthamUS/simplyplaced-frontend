@@ -1,4 +1,4 @@
-##**SIMPLY PLACED**
+## **SIMPLY PLACED**
 
 ## Project info
 
